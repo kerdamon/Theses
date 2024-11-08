@@ -1,0 +1,31 @@
+% \documentclass[11pt, a4paper, openright, twoside]{report} % for printing
+\documentclass[11pt, a4paper]{report}
+\input{setup}
+
+\begin{document}
+
+\thispagestyle{empty}
+\input{Content/title}
+
+% \listoftodos
+
+\tableofcontents
+
+\input{Content/Chapters/Introduction}
+\input{Content/Chapters/Glossary}
+\input{Content/Chapters/TheoreticalBackground}
+\input{Content/Chapters/EnvironmentSetup}
+\input{Content/Chapters/WLTestModule}
+\input{Content/Chapters/LeavesAlignmentModule}
+\input{Content/Chapters/TechnologiesAndTools}
+\input{Content/Chapters/ApplicationTechnicalDescription}
+\input{Content/Chapters/AnalysisEvaluation}
+\input{Content/Chapters/Conclusions}
+
+\printbibliography[heading=bibintoc, notcategory={images}]
+\printbibliography[heading=bibintoc, title={Images Attributions}, category={images}]
+
+\appendix
+\input{Content/Appendix/PackagesAndVersions}
+
+\end{document}

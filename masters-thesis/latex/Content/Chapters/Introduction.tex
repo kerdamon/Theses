@@ -1,0 +1,50 @@
+\chapter{Introduction} \label{chr:intro}
+
+Radiation therapy is an important field of medical science. Due to its highly specialized nature, there are very few free, ready-made software tools for working with this topic. In addition, the materials that can be found online are usually specialized articles, often requiring additional fees to gain access. For this reason, any applications connected to this area, especially open-source ones, are a significant help for students and scientists associated with this field.
+
+One of the common devices used in radiation therapy is the linear accelerator. Like any sophisticated medical equipment, these devices require regular calibration to maintain their precision and reliability. Calibration is essential, not only to ensure the accuracy of the radiation dose delivered to patients but also to meet rigorous safety standards and regulatory compliance.
+
+This thesis addresses this problem by proposing open software tools to assist in the maintenance of linear accelerators by developing a web application with functionality related to the calibration of these devices. 
+
+The collaboration with Damian Kubat, the head of the Department of Medical Physics at the National Institute of Oncology in Kraków, has led to the identification of the most significant challenges encountered during routine calibration of linacs. Consequently, two modules have been developed with the potential to address these challenges.
+
+\section{Purpose}
+
+This work aims to extend an existing web application with two modules:
+
+\begin{itemize}
+    \item Winston-Lutz test
+    \item MLC leaves alignment analysis for compliance with the designed plan
+\end{itemize}
+
+Both modules provide tooling for the calibration of linear accelerators with multileaf collimators. Ready solutions for carrying out the Winston-Lutz test are already available on the web, for example, the Pylinac library for Python language \cite{pylinac}, and they were used to develop the corresponding module. However, as for the analysis of the collimator leaves alignment and compliance with the plan, no ready-made solutions were found during the research phase, therefore the presented solution was designed from scratch as part of the thesis.
+
+\pagebreak
+
+\section{Structure of the thesis} 
+
+The thesis consists of five main parts, that span the next chapters: 
+
+\begin{description}
+    \item[Part I - Background]: Chapters 2, 3, 4
+    
+    Concepts and theory that are related to the scope of the thesis.
+    
+    \item[Part II - Module Definition]: Chapters 5, 6
+
+    Logical description of created modules and used algorithms.
+    
+    \item[Part III - Implementation]: Chapters 7, 8
+
+    Technical description of the application and used tools.
+    
+    \item[Part IV - Analysis]: Chapter 9
+    
+    Performed evaluations and their results.
+    
+    \item[Part V - Summary]: Chapter 10
+    
+    Conclusions and fields of applications.
+    
+\end{description}
+

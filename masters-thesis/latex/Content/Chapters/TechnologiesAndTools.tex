@@ -1,0 +1,63 @@
+\chapter{Used technologies and tools} \label{chr:usedTools}
+
+\section{Frontend}
+
+\subsection{HTML, CSS and JS}
+
+\paragraph{}
+
+\emph{HyperText Markup Language} (HTML) is used to define the structure of a web page. While HTML code alone is sufficient for displaying a basic static page, it is always used in combination with the other two technologies that give the page its appearance and interactivity. \cite{html}
+
+\paragraph{}
+
+\emph{Cascading Style Sheets} (CSS) is a list of rules that are used to enhance the visuals of a web page. This language determines the actual appearance of elements defined with HTML. \cite{front_101}
+
+\paragraph{}
+
+\emph{JavaScript} is a scripting language used to add interactivity to web pages and define custom logic of HTML elements. JS is a weakly typed language, which means that different values can be used where another type is expected, and the language will perform necessary conversions to make that possible. Although this approach is convenient for quick prototyping, it can be problematic in the long term, particularly in situations, where a value of the wrong type is used by mistake. The language will permit that usage during the coding process, and this could result in an error during the execution of a program (in this case often on user's web page). 
+
+To prevent such problems, a variant of JS called \emph{TypeScript} (TS) was developed. TS adds support for static types, and it is \emph{transpiled} to JS, which means, that TS is used only during development, when tooling helps programmers to write good code, and after development codebase is translated to JS which is run by browsers. \cite{typescript}
+
+\subsection{React}
+
+\emph{React} is a library for JS language that improves the process of building interfaces. The interface is composed of individual pieces called components, which are parts of code that encapsulates the interface element with its logic and are written in a functional and declarative way. React is the most popular frontend library and has a rich ecosystem as well as numerous extensions.\cite{react_dev}
+
+\subsection{React Router}
+
+\emph{React Router} is module that enables seamless page switching called \emph{client side routing}. In contrast to traditional websites, where each new page is requested and loaded from the server, along with CSS and JS assets, client-side routing enables an app to update the page without making another request. Instead, the app can immediately switch parts of the UI to different components. This approach allows a faster and more dynamic user experience. \cite{react_router}
+
+\subsection{Axios and fetching data from backend}
+
+Traditionally, every time a page needed to be reloaded, for example, after a user interaction, the browser sent a request to the server, which provided new data and necessary files. However, this process makes the user experience worse, since upon loading new pages, all the data has to be acquired all over again. A modern approach to designing web apps is different - the user interface is rendered by browsers on the client side, and the server is only queried for new data when it is needed in a process called \emph{data fetching}. This approach greatly reduces the amount of data sent over the network and therefore speeds up the UI.
+
+Axios is a library that integrates with the JS and React ecosystem and gives you the ability to fetch the data it needs. \cite{axios}
+
+\subsection{Tanstack Query}
+
+\emph{Tanstack Query} is a module that enables declarative and automatic data fetching. It simplifies the fetching process by encapsulating the imperative logic of working with requests and allows programmers to specify only the source of data and how fresh it needs to be able to fetch and use it. It also provides mechanisms like caching and background updates out of the box. \cite{tanstack_query}
+
+\subsection{Tailwindcss and daisyUI}
+
+\emph{Tailwindcss} is a framework for CSS that simplifies writing styles by providing pre-written classes that can be used directly in components. It provides a straightforward way to declare concise components that are responsive and performant, and out-of-the-box support for sizing, colours, typography, shadows, theming and hover and focus states. \cite{tailwind}
+
+\emph{DaisyUI} is a component library for TailwindCSS that provides ready-to-use components and styles that can be further modified with tailwindCSS. \cite{daisyUI}
+
+\section{Backend}
+
+\subsection{Python}
+
+\emph{Python} is an interpreted, scripting language with great support for data structures and an extensive ecosystem of data analysis tools, which makes it a great tool to work with data-oriented tasks. \cite{python}
+
+\subsection{Django and DRF}
+
+\emph{Django} is a web framework for Python which provides the necessary tools for setting up a production-ready server that can be utilised in building a web application. \cite{django}
+
+\emph{Django REST framework} (DRF) is a toolkit for building web APIs with built-in support for web browsable API, authentication, data serialization, and ORMs. \cite{drf}
+
+\subsection{Pylinac}
+
+\emph{Pylinac} is an open-source library for Python that provides QC tools in the field of therapy and diagnostic medical physics. It contains modules for automatic analysis of images and data obtained from linear accelerators, CT simulators, and other radiation oncology equipment. The library also provides lower-level modules and tools for image analysis algorithms. \cite{pylinac}
+
+\subsection{OpenCV}
+
+\emph{OpenCV} is an open-source computer vision library for Python and many other languages. OpenCV provides a comprehensive set of tools for all types of image analysis. \cite{openCV}

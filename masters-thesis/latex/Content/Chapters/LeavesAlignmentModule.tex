@@ -1,0 +1,194 @@
+\chapter{Leaves alignment analysis module} \label{chr:laModule}
+
+This chapter describes the structure, functionality and algorithms used in the LA analysis module. For technical description and implementation in application see \autoref{sec:techLA}.
+
+\section{Features}
+
+\begin{itemize}
+
+    \item \textbf{Automatic detection of discrepancies in leaves alignment}
+
+    Leaves that do not align with the given specification are automatically detected on a given valid EPID image. Each leaf is investigated separately. Leaves planned position are specified as JSON file.
+    
+    \item \textbf{Determination the divergence distance}
+
+    Once the dimensions of the input image have been defined, the algorithm returns the distance of each divergent leaf from its planned position.
+    
+    \item \textbf{Visually highlighting the discrepancies on images}
+
+    The locations where the leaf deviates from the specified tolerance or is not detected are visually marked on the image.
+    
+\end{itemize}
+
+\section{Interface structure}
+
+The module loads one EPID file along with metadata and returns processed data about not-aligned leaves in the form of a list with errored leaves, and images of where the deviations are graphically marked. In the current state of application development, data such as image size and leaf definition are entered manually. However, in the future, these values could be extracted from the DICOM RT Plan file.
+
+\subsection{Inputs} \label{sec:laAnalysisInputs}
+
+\subsubsection{Numerical values}
+
+\begin{itemize}
+
+    \item Horizontal real size of image (x) [mm]
+
+    \item Vertical real size of image (y) [mm]
+
+    \item Tolerance x [N pixels]
+
+    Distance of the detected leaf edge from the planned edge, above which a divergence is recognised.
+
+    \item Tolerance y [N pixels]
+
+    Distance of the horizontal, upper or lower edge of the leaf within which divergences are ignored. This is a method of mitigating the potential imperfections of the algorithms.
+
+    \item Permitted errors per leaf
+
+    The number of rows in which discrepancies are detected in a single leaf, beyond which it is considered faulty.
+
+    \item Binarisation threshold
+
+    Threshold value of the binarisation used in step \ref{laEdgesAlgo:binarised} of \nameref{sec:laDetermineEdgesAlgorithm} (\autoref{sec:laDetermineEdgesAlgorithm})
+
+    \item SE size
+
+    Size of the side of the square used as a structuring element in step \ref{laEdgesAlgo:closed} and \ref{laEdgesAlgo:finallyClosed} of \nameref{sec:laDetermineEdgesAlgorithm} (\autoref{sec:laDetermineEdgesAlgorithm}).
+
+    \item Sobel kernel size
+
+    Size of kernel used in Sobel filter in step \ref{laEdgesAlgo:sobel_x} and \ref{laEdgesAlgo:sobel_y} of \nameref{sec:laDetermineEdgesAlgorithm} (\autoref{sec:laDetermineEdgesAlgorithm}).
+
+\end{itemize}
+
+\subsubsection{Files}
+
+\begin{itemize}
+
+    \item Valid EPID image (defined in \autoref{subsec:laAlgoritmRestrictions})
+
+    \item JSON file containing leaves specification
+
+    The file should contain a list of objects with keys:
+
+    \begin{itemize}
+        \item \verb|id|: id of leaf
+        \item \verb|y_t|: y coordinate of upper edge of leaf
+        \item \verb|y_b|: y coordinate of bottom edge of leaf
+        \item \verb|x|: x coordinate of vertical edge of leaf
+        \item \verb|side|: side from which the leaf is located
+    \end{itemize}
+
+\end{itemize}
+
+\subsection{Outputs} \label{sec:laAnalysisOutputs}
+
+\subsubsection{Numerical values}
+
+\begin{itemize}
+
+    \item List of divergent leaves with a mean distance between detected and planned edge
+    
+\end{itemize}
+
+\subsubsection{Images}
+
+\begin{itemize}
+
+    \item Original image
+
+    \item Preprocessed image with detected edges of leaves
+
+    \item Image where left leaves alignment is visualised with colour
+
+    \item Image where right leaves alignment is visualised with colour
+
+    \item Above images with outlined leaves
+    
+\end{itemize}
+
+\pagebreak
+
+\section{Algorithm}
+
+The algorithms presented in this module have been developed by the author for this module and the thesis.
+
+\subsection{Algorithm allowances}
+
+\begin{itemize}
+
+    \item Images from any EPID can be used, with any SID.
+    
+    \item W-L test-type images can be used as long as they conform to restrictions.
+    
+\end{itemize}
+
+\subsection{Algorithm restrictions} \label{subsec:laAlgoritmRestrictions}
+
+\begin{itemize}
+
+    \item All leaves's edges must be visible.
+
+    \item Image is arranged so that the leaves move horizontally, along the lower and upper edges of the resulting image.
+
+    \item The image, once loaded, must be convertable to greyscale and the area where radiation fell must be darker than the non-radiated areas.
+
+    \item No gap exists between the upper and lower edges of leaves.
+    
+\end{itemize}
+
+\subsection{Algorithm definition}
+
+\begin{enumerate}
+
+    \item Determine the edges with algorithm defined in \autoref{sec:laDetermineEdgesAlgorithm}.
+
+    \item Detect upper and lower boundaries of the radiation field.
+
+    \item For each horizontal row of pixels in boundaries, check if the detected edge is within the specified tolerance, and mark the leaves and detected edges accordingly. Perform this step separately for images with left and right edges.
+
+    \begin{enumerate}
+        \item Mark the points in the current row which lie on the detected edge in green if they are in specified tolerance from the planned edge.
+        \item Mark the points in the current row which lie on the detected edge in red if they are further away from the planned edge than the specified tolerance.
+        \item Mark the points in the current row which lie on the detected edge in yellow if they are further away from the planned edge than the specified tolerance, but are close to the upper or lower edge of the leaf.
+        \item Mark the whole row in the corresponding colour if the edge is not detected.
+    \end{enumerate}
+
+    \item For each leaf, count the number of rows where problems highlighted in red are found, and if the number is greater than the specified parameter, mark the leaf as faulty.
+    
+\end{enumerate}
+
+\pagebreak
+
+\subsection{Algorithm for determining edges of leaves} \label{sec:laDetermineEdgesAlgorithm}
+
+\begin{enumerate}
+
+    \item Binarise image.
+    \label{laEdgesAlgo:binarised}
+    
+    \item Invert image.
+
+    \item Apply morphological closing operation to ensure continuity of radiation field.
+    \label{laEdgesAlgo:closed}
+
+    \item Apply Sobel filter for direction x on the image from step \ref{laEdgesAlgo:closed}.
+    \label{laEdgesAlgo:sobel_x}
+
+    The result of this operation will be an image in which the pixel values are equal to the calculated gradient of the surrounding pixels in the horizontal direction. Pixels located on the "left" edge will have different values than those located on the "right" edge. More precisely, one set of values will be positive, while the other will be negative.
+    
+
+    \item Perform two separate binarizations of the image from step \ref{laEdgesAlgo:sobel_x} with two different thresholds, separating the image into an image with left edges, and an image with right edges.
+    \label{laEdgesAlgo:sobel_l_r}
+
+    \item Apply Sobel filter for direction y on the image from step \ref{laEdgesAlgo:closed}.
+    \label{laEdgesAlgo:sobel_y}
+
+    \item Convert image from step \ref{laEdgesAlgo:sobel_y} by calculating gradient magnitude for each pixel.(\autoref{eq:sobelGradientMagnitude})
+
+    \item Change the value of all pixels to no edge in the image from step \ref{laEdgesAlgo:sobel_l_r} if in the image from step \ref{laEdgesAlgo:sobel_y} corresponding pixel contains an edge. Perform this step separately for images with left and right edges.
+    \label{laEdgesAlgo:sobel_cleared_l_r}
+
+    \item Apply morphological closing separately on both images from step \ref{laEdgesAlgo:sobel_cleared_l_r} to ensure continuity of edges.
+    \label{laEdgesAlgo:finallyClosed}
+    
+\end{enumerate}
