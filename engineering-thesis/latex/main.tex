@@ -1,0 +1,87 @@
+% Setup Document
+\documentclass[11pt,a4paper]{report}
+\usepackage[english]{babel}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=3.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{gensymb} % for \degree
+\usepackage{minted} % for \begin{figure}
+% \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\usepackage{amsmath} % for piecewise equations
+\usepackage[hyphens]{xurl}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage{multirow}
+
+\usepackage{subcaption}
+
+% for \ceil
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+
+
+%% ------------------------------------------------------------------
+\begin{document}
+\thispagestyle{empty}
+
+\input{title.tex}
+
+% \todototoc
+% \listoftodos
+
+\tableofcontents
+
+\input{Chapters/Introduction}
+\input{Chapters/TheoreticalBackground}
+\input{Chapters/Glossary}
+\input{Chapters/EcosystemDefinition}
+\input{Chapters/Simulation}
+\input{Chapters/Agents}
+\input{Chapters/GeneticAlgorithmsForEvolutionOfAgents}
+\input{Chapters/ImplementationInUnity}
+\input{Chapters/TrainingModels}
+\input{Chapters/AnalysisOfSimulations}
+\input{Chapters/Conclusions}
+\input{Chapters/FurtherDevelopmentPossibilities}
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{plain}
+\bibliography{Bibliography}
+
+\appendix
+\input{Appendix/TrainingLogs}
+\input{Appendix/PackagesAndVersions}
+
+\end{document}
+%% ------------------------------------------------------------------

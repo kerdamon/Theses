@@ -1,0 +1,327 @@
+\chapter{The agent component details}
+\label{agentsChapter}
+This chapter is focused on a more detailed description of the agent. Agents are treated as a separate system with multiple components.
+
+\section{Description of agent's components}
+\subsection{Features}
+\label{featuresDefinition}
+\emph{Feature} is an integer ranging from 0 to 100. Features are set at agent's birth and are later unchangeable. Features alter agents parameters and have an impact on its behaviour. There are 3 features for each actor:
+\begin{description}
+    \item[Speed] alters agent's movement speed.
+    
+    \begin{equation}
+        s = (\sqrt[50]{2})^{v-50} \cdot a_s
+    \end{equation}
+    where
+    \begin{itemize}
+        \item $s$ is agents movement speed
+        \item $v$ is value of speed feature
+        \item $a_s$ is specific parameter defined in \hyperref[featuresNeedsStatesImplementation]{implementation}
+    \end{itemize}
+    
+    \item[Sensory Range] corresponds to agent ability to see other agents. For rabbits greater sensory range means that they can earlier begin to escape its predator.
+    
+    \begin{equation}
+        r_s = \frac{r_{max} - r_{min}}{100} v + r_{min}
+    \end{equation}
+    where
+    \begin{itemize}
+        \item $r_s$ is agents sensory range
+        \item $r_{min}$ is minimal sensory range
+        \item $r_{max}$ is maximal sensory range
+        \item $v$ is value of sensory range feature
+    \end{itemize}
+    
+    \item[Fertility] is responsible for controlling how fast agent regenerates after reproduction
+    
+    \begin{equation}
+        m = \frac{2}{500} v + 0.8
+    \end{equation}
+    where
+    \begin{itemize}
+        \item $m$ is modifier applied to growth rate of Reproduction urge of agent
+        \item $v$ is value of fertility feature
+    \end{itemize}
+    
+    Fertility also regulates how many offspring a mother gives birth to.
+    
+    \begin{equation}
+        n = \bigg\lfloor {\frac{2d+1}{101} v} \bigg\rfloor - d
+    \end{equation}
+    where
+    \begin{itemize}
+        \item $n$ is the number of offspring a mother gives birth to
+        \item $d$ is the maximum variation in the number of offspring by feature
+        \item $v$ is value of fertility feature
+    \end{itemize}
+    
+\end{description}
+
+\subsubsection{Genetic cost}
+The \emph{genetic cost} parameter $\delta$ is related to features. The higher values are, the better agent is adapted to the environment, but it does involve increased energy consumption. 
+
+The genetic cost is simply the sum of all feature values.
+
+\begin{equation}
+    \delta = \sum_{i=1}^{n} v_i
+\end{equation}
+where
+\begin{itemize}
+    \item $v_i$ are value of i-th feature
+    \item $n$ is number of features, in this case $n=3$
+\end{itemize}
+
+More useful, however, is the \emph{relative genetic cost} $\delta_r$, which is the ratio of the genetic cost to the sum of the maximum values of the traits.
+
+\begin{equation}
+    \delta_r = \frac{\delta}{n \cdot v_{max}} 
+\end{equation}
+where
+\begin{itemize}
+    \item $v^i_{max}$ are maximal value of i-th feature, in this case $v_{max} = 100$
+    \item $n$ is number of features, in this case $n=3$
+\end{itemize}
+
+\subsection{Needs}
+\label{needsDefinition}
+\emph{Need} is a real number between 0 and 100. Needs are constantly increasing during the simulation. There are needs that must be satisfied for an agent to live, such as hunger, and if this need reaches its maximum value, the agent dies. Needs do not change any of the agent's parameters, but they influence the agent's decisions in such a way that the agent strives to satisfy them. There are 3 needs for each actor:
+\begin{description}
+    \item[Hunger] obliges agent to look for food or hunt for prey. If an agent's hunger reaches 100\% the agent dies.
+    \item[Thirst] compels agent to look for water source and drink. If an agent's thirst reaches 100\% the agent dies.
+    \item[Reproduction urge] pushes agent to look for mate and extend the species.
+\end{description}
+
+\subsubsection{Growth rate}
+Rate at which needs grow is influenced by relative genetic cost up to two times the normal growth and can be described by function:
+
+\begin{equation}
+    f(t) = \alpha t (1 + \delta_r) \cdot m
+\end{equation}
+where
+\begin{itemize}
+    \item $f(t)$ is value of need at time t
+    \item $\alpha$ is fixed need gain defined during simulation
+    \item $\delta_r$ is relative genetic cost and $0 < \delta_r < 1$
+    \item $m$ is modifier that can be different for each need, but is equal to $1$ in most cases
+\end{itemize}
+
+\subsection{Body}
+Each agent has a body, which is responsible for the agent's physics. It has a collider and interacts with other objects in the game in a physical way.
+
+\subsection{State Machine}
+\emph{State Machine} is component responsible for deciding what activity should agent perform at given time, and activate relevant policy based on the surrounding environment and agent's needs.
+
+\subsection{Machine Learning Agent}
+A \emph{machine learning agent} is a subsystem of an agent that utilises machine learning. It is responsible for carrying out the activity determined by the state machine.
+
+\subsubsection{Sensors}
+The agent has two types of sensors:
+\begin{enumerate}
+    \item \textbf{Vector sensor}
+    
+    A vector sensor of agent consists of two elements: x-coordinate and y-coordinate of the agent's velocity vector.
+    
+    \item \textbf{Grid sensor}
+    
+    The agent has two grid sensors - one precise and the other long-range. The precise sensor is used by the agent to observe the agent's immediate surroundings and represents the agent's sense of sight, or hearing. The agent uses it to determine the exact location of environmental elements in its proximity. The long-range sensor, on the other hand, is responsible for the agent's general understanding of the environment and helps the agent determine the direction in which an environmental item is located without giving the agent its exact location. It represents the sense of smell, or again hearing.
+     
+    \textbf{Detectable components}: female fox, male fox, female rabbit, male rabbit, water, wall, food
+     
+\end{enumerate}
+
+\subsubsection{Decision requester}
+\emph{Decision requester} is component that request decision from policy automatically and periodically, at specified intervals. If decision is requested policy gathers input and maps it to actions. If the decision frequency is lower than the number of simulation frames, the last decision is repeated between frames.
+
+\section{Decision making process}
+The agent makes decisions based on observations of his environment, and his current needs. Observing the environment means, for example, spotting a predator, while deciding on the basis of current needs implies switching to food search mode when the agent is hungry. 
+
+There are several pre-trained models of agent behaviour. Each model corresponds to some specific activity that the agent performs, for example searching for food. The choice of a particular model depends on the state the agent is in and is managed by a state machine.
+
+Because training such a general model would be demanding and difficult to achieve, several less complex machine learning models are used, instead of a single, complex one handling the whole agent behaviour. The agent adapts its behavioural model to the current situation.
+
+\subsubsection{Example}
+The rabbit is very hungry and a bit thirsty. So the food-seeking state is activated, and thus the policy responsible for this task is loaded. After a while, the rabbit has found and eaten a carrot, but in the meantime its thirst has increased even more, so the state machine will switch on the state of searching for water. However, in the meantime, a fox has appeared next to the agent, so instead the state of running away from the predator will be activated. Until the rabbit either does not flee from the fox or is eaten this state will persist and the model responsible for fleeing will direct the agent's actions.
+
+\subsection{Switching between states}
+\label{switchingStates}
+The states are selected on a ranking basis. The state machine constantly monitors all states in real time and selects the one with the highest rank. There are two types of states: \emph{main state} and \emph{special state}. 
+
+The main states have ranking functions that determine the rank for a given state returning a real value $y \in [0, 1]$ . This function must be defined separately for each state. An example would be a linear function mapping the hunger value to the rank for the looking for food state.
+
+Special states instead of a ranking function have an activation function returning the value $y \in \{0, 1\}$, and having a predetermined rank value from the range $[0, 2]$, which is multiplied by the value returned by the activation function.
+
+\subsection{States}
+\label{statesDefinition}
+\subsubsection{Main States}
+\begin{enumerate}
+    \item \textbf{Chilling}
+    
+    Agents: all agents
+    
+    Description: This state represents agent's resting and is activated, when agent has nothing to do (all needs are met, there is no predator in sensory range).
+    
+    Ranking function:
+    \begin{equation}
+        f(x) = a_c
+    \end{equation}
+    where $a_c$ is specific parameter defined in \hyperref[featuresNeedsStatesImplementation]{implementation}.
+    
+    ML Model: Basic, untrained model, which means that the agent makes small random movements, but stays in one place at the same time without standing completely still.
+    
+    \item \textbf{Looking for food}
+    
+    Agents: rabbits
+    
+    Description: This state represents looking for carrots and is activated, when rabbit is hungry.
+    
+    Ranking function:
+    \begin{equation}
+        f(x) = x
+    \end{equation}
+    where $x$ is value of hunger.
+    
+    ML Model: \hyperref[eatingCarrotModel]{Eathing Carrot Model}
+    
+    \item \textbf{Hunting}
+    
+    Agents: foxes
+    
+    Description: This state represents looking for rabbits to eat and is activated, when fox is hungry.
+    
+    Ranking function:
+    \begin{equation}
+        f(x) = x
+    \end{equation}
+    where $x$ is value of hunger.
+    
+    ML Model: \hyperref[huntingModel]{Hunting Model}
+    
+    \item \textbf{Looking for mate}
+    
+    Agents: all agents
+    
+    Description: This state represents looking for partner to reproduce and is activated, when agent has high reproduction urge.
+    
+    Ranking function:
+    \begin{equation}
+        f(x) = \frac{x}{100}a_m^{x-100}
+    \end{equation}
+    where $x$ is value of reproduction urge and $a_m$ is specific parameter defined in \hyperref[featuresNeedsStatesImplementation]{implementation}.
+    
+    ML Model: \hyperref[matingModel]{Mating Model}
+    
+    \item \textbf{Looking for water}
+    
+    Agents: all agents
+    
+    Description: This state represents looking for water and is activated, when agent is thirsty.
+    
+    Ranking function:
+    \begin{equation}
+        f(x) = x
+    \end{equation}
+    where $x$ is value of thirst.
+    
+    ML Model: \hyperref[drinkingModel]{Drinking Model}
+    
+\end{enumerate}
+
+\subsubsection{Special States}
+\begin{enumerate}
+    \item \textbf{Drinking}
+    
+    Agents: all agents
+    
+    Description: This state represents drinking and is active while agent is interacting with water.
+    
+    Activation function:
+    \begin{equation}
+        f(x)= \begin{cases} 
+            0 \quad & \text{if drinking interaction is not active} \\
+            1 \quad & \text{if drinking interaction is active}
+          \end{cases}
+    \end{equation}
+
+    ML Model: None. Agent waits for drinking interaction to end.
+    
+    \item \textbf{Eating}
+    
+    Agents: rabbits
+    
+    Description: This state represents eating and is active while agent is interacting with carrot.
+    
+    Activation function:
+    \begin{equation}
+        f(x)= \begin{cases} 
+            0 \quad & \text{if eating carrot interaction is not active} \\
+            1 \quad & \text{if eating carrot interaction is active}
+          \end{cases}
+    \end{equation}
+
+    ML Model: None. Agent waits for eating carrot interaction to end.
+    
+    \item \textbf{Escaping Predator}
+    
+    Agents: rabbit
+    
+    Description: This state represents running away from predator, when it is near.
+    
+    Activation function:
+    \begin{equation}
+        f(x)= \begin{cases} 
+            0 \quad & \text{if no predator is in sensory range} \\
+            1 \quad & \text{if predator is in sensory range}
+          \end{cases}
+    \end{equation}
+    
+    ML Model: \hyperref[escapingPredatorModel]{Escaping Predator Model}
+    
+\end{enumerate}
+
+\subsection{Models}
+The agent uses machine learning to make decisions about specific activity. For each of these actions, there is a different model responsible for solving that task.
+\begin{enumerate}
+    \item \textbf{Drinking}
+    \label{drinkingModel}
+    
+    Description: Agent aims to find water as soon as possible and interact with it.
+    
+    \item \textbf{Eating Carrot}
+    \label{eatingCarrotModel}
+    
+    Description: Agent aims to find carrot as soon as possible and interact with it.
+    
+    \item \textbf{Mating}
+    \label{matingModel}
+    
+    Description: Agent aims to find carrot as soon as possible and interact with it.
+    
+    \item \textbf{Hunting}
+    \label{huntingModel}
+    
+    Description: Fox aims to find rabbit as soon as possible and interact with it.
+    
+    \item \textbf{Escaping Predator}
+    \label{escapingPredatorModel}
+    
+    Description: Rabbit aims to escape predator and avoid being eaten.
+    
+\end{enumerate}
+
+\newpage
+\subsection{Actions}
+\emph{Actions} are results of agent decisions. Essentially actions are values returned by policy that tells agent how to behave. Actions can be discrete or continuous. In this simulation all agents have the same actions - three continuous actions and one discrete action.
+
+\subsubsection{Continuous actions}
+\begin{itemize}
+    \item value telling agent to move forward or backward,
+    \item value telling agent to move right or left,
+    \item value by which agent should rotate.
+\end{itemize}
+
+Each continuous action has value in range $[-1, 1]$.
+
+\subsubsection{Discrete actions}
+\begin{itemize}
+    \item boolean value to tell if agent want to initiate interaction.
+\end{itemize}

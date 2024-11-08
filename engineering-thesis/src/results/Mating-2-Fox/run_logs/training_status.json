@@ -1,0 +1,110 @@
+{
+    "is_training": {
+        "lesson_num": 0
+    },
+    "rabbit_eating_carrot_reward": {
+        "lesson_num": 0
+    },
+    "fox_eating_rabbit_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "fox_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "rabbit_on_eaten": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_wall": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_water": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_food": {
+        "lesson_num": 0
+    },
+    "agent_drink_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_mating_reward": {
+        "lesson_num": 0
+    },
+    "fox_mating_reward": {
+        "lesson_num": 0
+    },
+    "agent_speed": {
+        "lesson_num": 0
+    },
+    "agent_sensory_range": {
+        "lesson_num": 0
+    },
+    "training_area_size": {
+        "lesson_num": 2
+    },
+    "MaleFoxMovement": {
+        "checkpoints": [
+            {
+                "steps": 336960,
+                "file_path": "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-336960.onnx",
+                "reward": 9.866749494026104,
+                "creation_time": 1641272745.9134939,
+                "auxillary_file_paths": [
+                    "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-336960.pt"
+                ]
+            },
+            {
+                "steps": 499936,
+                "file_path": "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-499936.onnx",
+                "reward": 6.769999460627635,
+                "creation_time": 1641273750.7755816,
+                "auxillary_file_paths": [
+                    "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-499936.pt"
+                ]
+            },
+            {
+                "steps": 528960,
+                "file_path": "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-528960.onnx",
+                "reward": 3.1226663663983345,
+                "creation_time": 1641273918.5766966,
+                "auxillary_file_paths": [
+                    "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-528960.pt"
+                ]
+            },
+            {
+                "steps": 646560,
+                "file_path": "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-646560.onnx",
+                "reward": null,
+                "creation_time": 1641276085.3869467,
+                "auxillary_file_paths": [
+                    "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-646560.pt"
+                ]
+            },
+            {
+                "steps": 720480,
+                "file_path": "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-720480.onnx",
+                "reward": 2.1062497643133002,
+                "creation_time": 1641277721.890435,
+                "auxillary_file_paths": [
+                    "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-720480.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 720480,
+            "file_path": "results\\Mating-2-Fox\\MaleFoxMovement.onnx",
+            "reward": 2.1062497643133002,
+            "creation_time": 1641277721.890435,
+            "auxillary_file_paths": [
+                "results\\Mating-2-Fox\\MaleFoxMovement\\MaleFoxMovement-720480.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

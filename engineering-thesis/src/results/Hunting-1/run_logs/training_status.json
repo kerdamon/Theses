@@ -1,0 +1,110 @@
+{
+    "is_training": {
+        "lesson_num": 0
+    },
+    "rabbit_eating_carrot_reward": {
+        "lesson_num": 0
+    },
+    "fox_eating_rabbit_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "fox_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "rabbit_on_eaten": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_wall": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_water": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_food": {
+        "lesson_num": 0
+    },
+    "agent_drink_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_mating_reward": {
+        "lesson_num": 0
+    },
+    "fox_mating_reward": {
+        "lesson_num": 0
+    },
+    "agent_speed": {
+        "lesson_num": 0
+    },
+    "agent_sensory_range": {
+        "lesson_num": 0
+    },
+    "training_area_size": {
+        "lesson_num": 2
+    },
+    "FoxMovement": {
+        "checkpoints": [
+            {
+                "steps": 766080,
+                "file_path": "results\\Hunting-1\\FoxMovement\\FoxMovement-766080.onnx",
+                "reward": 0.8439998596906662,
+                "creation_time": 1641334395.3435757,
+                "auxillary_file_paths": [
+                    "results\\Hunting-1\\FoxMovement\\FoxMovement-766080.pt"
+                ]
+            },
+            {
+                "steps": 947200,
+                "file_path": "results\\Hunting-1\\FoxMovement\\FoxMovement-947200.onnx",
+                "reward": null,
+                "creation_time": 1641339748.9628694,
+                "auxillary_file_paths": [
+                    "results\\Hunting-1\\FoxMovement\\FoxMovement-947200.pt"
+                ]
+            },
+            {
+                "steps": 948560,
+                "file_path": "results\\Hunting-1\\FoxMovement\\FoxMovement-948560.onnx",
+                "reward": -0.014749999530613423,
+                "creation_time": 1641340724.6585112,
+                "auxillary_file_paths": [
+                    "results\\Hunting-1\\FoxMovement\\FoxMovement-948560.pt"
+                ]
+            },
+            {
+                "steps": 999952,
+                "file_path": "results\\Hunting-1\\FoxMovement\\FoxMovement-999952.onnx",
+                "reward": -3.072833135103186,
+                "creation_time": 1641342169.5898201,
+                "auxillary_file_paths": [
+                    "results\\Hunting-1\\FoxMovement\\FoxMovement-999952.pt"
+                ]
+            },
+            {
+                "steps": 1111760,
+                "file_path": "results\\Hunting-1\\FoxMovement\\FoxMovement-1111760.onnx",
+                "reward": 1.8062499941637118,
+                "creation_time": 1641345174.8642864,
+                "auxillary_file_paths": [
+                    "results\\Hunting-1\\FoxMovement\\FoxMovement-1111760.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1111760,
+            "file_path": "results\\Hunting-1\\FoxMovement.onnx",
+            "reward": 1.8062499941637118,
+            "creation_time": 1641345174.8642864,
+            "auxillary_file_paths": [
+                "results\\Hunting-1\\FoxMovement\\FoxMovement-1111760.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

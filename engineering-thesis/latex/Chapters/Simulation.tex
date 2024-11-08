@@ -1,0 +1,33 @@
+\chapter{Simulation}
+\label{simulationChapter}
+\section{Simulation execution}
+The simulation involves the execution of actions by agents present in the ecosystem. They take actions based on current needs and analysis of their environment. Each agent has the ability to make decisions, move and interact with the environment. Each agent focuses its actions to satisfy its needs. Needs increase in time, so each agent must meet them periodically. Rate at which needs are growing also depends on features - higher values means a better adapted individual, but it comes at a price in terms of faster energy consumption.
+
+\section{Evolution of the simulation}
+The purpose of the simulation is to observe evolution. Evolution occurs in the process of reproduction of individuals. Actors pass on their features to their offspring in the process of reproduction, thus increasing the population and diversity of the species. What is evolved is the set of features of the individuals. The model of movement and decision-making is not changed in any way. Therefore, individuals differ between generations only in features. During the simulation, both prey and predators evolve, developing their traits in parallel and adapting to the environment in which they live.
+
+\section{Simulation metrics of interest}
+During simulation various metrics are being tracked. These information is saved to file with timestamps but also are available live during simulation. User can navigate through the environment and display the current values of those metrics. Metrics observed during simulation:
+\begin{itemize}
+    \item Current population of rabbits
+    \item Current population of foxes
+    \item Median for each value of rabbits features 
+    \item Median for each value of foxes features
+    \item Number of rabbits dead for the following reasons: starvation, thirst, and being eaten by a fox
+    \item Number of foxes dead for the following reasons: starvation, and thirst
+\end{itemize}
+
+\section{Advantages and disadvantages of the simulation model}
+As being said in section \nameref{modeling_ecosystem} there are two ecological models that have different applications and restrictions.
+There are some advantages to using this model due to fact that it bypasses some of the limits from the analytical model described in \nameref{lotkaVolterraLimitations}:
+\begin{itemize}
+    \item Prey is not always able to find food, it is determined by position of agent in 3D world and agents can die of starvation.
+    \item During this process, agents evolve, changing their features and adapting to the environment. It depends on the particular simulation whether this adaptation favours one species or whether they evolve in parallel, effectively mitigating the impact of these changes on other species.
+    \item Predators are not always willing to eat prey. They have other needs such as thirst and if they are not hungry, they will not hunt for prey.
+\end{itemize}
+
+However simulation has its own restrictions:
+\begin{itemize}
+    \item Simulation is non-deterministic. Due to the complexity of the models, interactions between them, and the randomness related to reproducing and inheritance, the state of the environment cannot be easily predicted. The outcome cannot be described by a function that depends only on time.
+    \item Result does not necessarily have to be stable. Function of population over time will not always be periodical. It may happen that after several cycles one species suddenly goes extinct.
+\end{itemize}

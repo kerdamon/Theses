@@ -1,0 +1,69 @@
+\chapter{Training Models}
+\label{trainingEnvironmentsDescription}
+Training was done in following order: Drinking, Eatting Carrot, Mating, Hunting, Escaping Predator. Subsequent training scenarios are more and more advanced and use models that have been trained before. In each case, the agents' features are randomised so that the trained model could cope with the changing features during the simulation. Each scenario also had specific simplified interactions to aid the training process. Additionally, in the scenarios, the actors receive negative rewards that increase over time, accumulating to specific values intended to encourage the agents to complete the task as quickly as possible and not to sit idle.
+
+\subsubsection{Curriculum learning}
+In order to train the models better and faster, a \emph{curriculum learning} process was used, which means that the parameters of the scenario were changed during learning process. By default, each scenario consisted of 4 lessons changing the size of the training area and thus the density of the distribution of elements in it. The scale of the area is 0.5, 1, 2 and 3 in consecutive lessons respectively. Only the plane and borders are resized, not other elements.
+
+\subsubsection{Results and configuration}
+Results and configuration files can be found in \autoref{TrainingFiles}
+
+\section{Drinking}
+In this scenario, all agents trained the same drinking model. They aimed to find a source of water and interact with it.
+\begin{description}
+    \item[Number of agents] 4 - 1 male rabbit, 1 female rabbit, 1 male fox, 1 female fox
+    \item[Number of training areas] 7
+    \item[Interaction] When interacting with water the agent receives a reward, and is moved to a random location in the training environment.
+    \item[Rewards] +1 for interaction with water, -0.2 for bumping into wall or carrot, -1 by default in each episode.
+    \item[Curriculum] No additional changes other than the size of the environment.
+\end{description}
+
+\section{Eating Carrot}
+In this scenario, the rabbits train to find food while the foxes wander around in the background, using a model already trained to search for water.
+\begin{description}
+    \item[Number of agents] 10 - 4 male rabbits, 4 female rabbits, 1 male fox, 1 female fox
+    \item[Number of training areas] 6
+    \item[Interaction] When an agent interacts with a carrot, the carrot disappears and the agent gets a reward.
+    \item[Rewards] +1 for interaction with water, -0.2 for bumping into wall or water, -1 by default in each episode.
+    \item[Curriculum] No additional changes other than the size of the environment.
+\end{description}
+
+\section{Mating - rabbit}
+In this scenario, male rabbits train to find female rabbits and interact with them.
+\begin{description}
+    \item[Number of agents] 12 - 3 male rabbit, 9 female rabbit
+    \item[Number of training areas] 5
+    \item[Interaction] When the male rabbit interacts with the female rabbit, he gets a reward and the female is moved to a random location in the environment. Females are randomly distributed in the environment and are in a chilling state. Females are not involved in the training of the model, they are only part of the environment with which males can interact.
+    \item[Rewards] +1 for interaction with female, -0.01 for bumping into wall, carrot or water, -1 by default in each episode.
+    \item[Curriculum] Water was deactivated in the first two lessons and added in the third and fourth.
+\end{description}
+
+\section{Mating - fox}
+In this scenario, male foxes train to find female foxes and interact with them.
+\begin{description}
+    \item[Number of agents] 12 - 3 male fox, 9 female fox
+    \item[Number of training areas] 5
+    \item[Interaction] When the male fox interacts with the male fox, he gets a reward and the female is moved to a random location in the environment. Females are randomly distributed in the environment and are in a chilling state. Females are not involved in the training of the model, they are only part of the environment with which males can interact.
+    \item[Rewards] +1 for interaction with female, -0.01 for bumping into wall, carrot or water, -1 by default in each episode.
+    \item[Curriculum] Water was deactivated in the first two lessons and added in the third and fourth.
+\end{description}
+
+\section{Hunting}
+In this scenario, foxes train to find rabbits and eat them.
+\begin{description}
+    \item[Number of agents] 12 - 4 male rabbit, 4 female rabbit, 2 male fox, 2 female fox
+    \item[Number of training areas] 6
+    \item[Interaction] When the fox interacts with the rabbit, it gets a reward and the rabbit is moved to a random location in the environment. Rabbits are randomly distributed in the environment and are in a chilling state. Rabbits are not involved in the training of the model, they are only part of the environment with which foxes can interact.
+    \item[Rewards] +1 for interaction with rabbit, -0.01 for bumping into wall, carrot or water, -1 by default in each episode
+    \item[Curriculum] Water was deactivated in the first two lessons and added in the third and fourth. After some time, the previous size from the second lesson was reverted, due to the low average reward achieved by the agents in each episode.
+\end{description}
+
+\section{Escaping Predator}
+In this scenario, rabbits train to escape foxes that are trying to eat them.
+\begin{description}
+    \item[Number of agents] 12 - 4 male rabbit, 4 female rabbit, 2 male fox, 2 female fox
+    \item[Number of training areas] 6
+    \item[Interaction] When the fox interacts with the rabbit, the rabbit receives a penalty and is moved to a random location in the environment.
+    \item[Rewards] -1 for the rabbit when the fox interacts with it, -0.01 for bumping into wall, carrot or water, +1 by default in each episode
+    \item[Curriculum] There was only one lesson in a small area
+\end{description}

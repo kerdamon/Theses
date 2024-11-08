@@ -1,0 +1,43 @@
+\chapter{Further development possibilities}
+\label{furtherDevelopmentPossibilitiesChapter}
+\section{Possible fields of application}
+\begin{itemize}
+    \item Computer games - fauna, realistic backgrounds that enhance gameplay and immersion
+    \item More advanced simulations that need agents who realistically make decisions based on their needs
+    \item Background for various types of animation
+    \item Scientific research - modelling the actual ecosystem
+\end{itemize}
+
+\section{Technicalities and improvement to implementation}
+\begin{description}
+    \item[Fuzzy systems for switching states] - Instead of the current ranking system, fuzzy logic could be used, which seems a very good solution for this type of task. The state switching system itself would also become clearer and more consistent.
+\end{description}
+
+\section{New features}
+\begin{description}
+    \item[Size] - Influences strength and noticeability. Reduces the risk of attack by birds (they will not be able to carry the prey), but increases by foxes (larger animals give more energy).
+\end{description}
+
+\section{New mechanics}
+\begin{description}
+    \item[Pregnancy] - add a pregnancy period after mating interaction that offspring is spawned after. This will add another layer of complexity, as a pregnant rabbit may be eaten before its offspring are born.
+    \item[Aging of agents] - This is linked to the pregnancy mechanic, the agents would have different stages of development. Right after birth, young versions of agents would be spawned, with temporarily lowered trait values, unable to reproduce, or maybe even using slightly less trained policies to reflect their lesser experience in all activities.
+    \item[Camoflage] - extension of the spotting system, could significantly enhance the simulation and mechanics of hunting.
+    \item[Attack sytem] - another extension to hunting mechanic. Agents would have health points, and predators would have to first kill animal to be able to eat it.
+    \item[Dying of plants] - After a while the plant would wither and die. It would be possible to get rid of the parameter of the maximum number of plants around the generator, because the maximum number of plants would stabilise and remain naturally at a certain level, when the frequency of death of old plants would equal the frequency of appearance of new ones.
+    \item[Better plant growth model] - plants will grow differently depending on their position in the environment, for example they will grow better near water.
+\end{description}
+
+\section{New States}
+\begin{description}
+    \item[Better chilling] - add some agent behavior to chilling state
+    \item[Sleeping] - add sleeping state that agent reduces tiredness and regenerates itself
+    \item[Dead] - instead of disappearing immediately after death, the bodies of agents could remain in the environment for some time
+\end{description}
+
+\section{New Species}
+\begin{description}
+    \item[Hawk] - eats rabbits. Reproduces through laying down eggs that can be eaten by foxes (but it would give much less energy than rabbit, so foxes would rather hunt for them), so reproduction for hawks would be more challenging than for rabbits, for example. Hawks could only eat small rabbits, so this feature would be more relevant. This species, however, would have their own unique characteristics that could give them an advantage in certain environments, such as flying (their movement would not be restricted by environmental elements and they could spot prey more easily and the prey would be less likely to escape).
+    \item[Scavenging species] - eats dead agents
+    \item[Omnivorous species] - eats other agents and plants
+\end{description}

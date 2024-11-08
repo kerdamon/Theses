@@ -1,0 +1,15 @@
+\chapter{Genetic algorithms for evolution of agents}
+\label{geneticAlgorithmsChapter}
+In the same way that a simulation model of an ecosystem differs from an analytical one, the different parts of the genetic algorithm used in this simulation will also differ slightly compared to standard genetic algorithms.
+
+\section{Selection}
+Firstly, there is no defined fitness function. It is not needed. During the simulation, the individuals match naturally. If an individual is less well adapted to its environment, there is a greater chance that it will be eaten or that it will not be able to satisfy its own needs and will die. The individuals who do mate, however, are those who have managed to overcome difficulties. They are able to pass on to their offspring the genes that have enabled them to get this far. Selection can thus be referred to as natural selection.
+
+\section{Chromosome representation}
+Naturally, a chromosome will correspond to the set of all traits an agent possesses and a single gene to a single trait.
+
+\section{Crossover}
+As the number of offspring is usually greater than 2, uniform crossover has been chosen as the crossover operator. During gene passing, it is randomly determined whether a child receives a feature from its father or its mother. The probabilities are each equal to 0.5.
+
+\section{Mutation}
+As chromosome contains integer values random resetting mutation method was chosen. For each gene (feature), there is a probability that it will be replaced by a new random integer value $v \in [0, 100]$.

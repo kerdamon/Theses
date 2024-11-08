@@ -1,0 +1,32 @@
+\chapter{The project namespace}
+
+\section{Logical items}
+\begin{description}
+    \item[Ecosystem] - consists of environment together with actors who can interact with themselves and with this environment and evolve over time.
+    \item[(Ecosystem) Component] - the building block of ecosystem. Everything in the ecosystem is a component of the ecosystem.
+    \item[Environment] - set of components that agent is able to perceive and interact with.
+    \item[Interaction] - happens between two agents or other simulation object, is initiated by agent.
+    \item[Action] - result of decision made by agent.
+    \item[Agent] - entity that is able to move, make decisions and interact with its environment.
+    \item[Food] - stationary object that can actor can interact with.
+    \item[Environment element] - stationary object that agent can collide with.
+\end{description}
+
+\section{Technical items}
+\begin{description}
+    \item[Academy] - Singleton object which controls timing, reset, and training/inference settings of the environment.
+    \item[Action] - The carrying-out of a decision on the part of an agent within the environment.
+    \item[Agent] - Unity Component which produces observations and takes actions in the environment. Agents actions are determined by decisions produced by a Policy.
+    \item[Decision] - The specification produced by a Policy for an action to be carried out given an observation.
+    \item[Editor] - The Unity Editor, which may include any pane (e.g. Hierarchy, Scene, Inspector).
+    \item[Experience] - Corresponds to a tuple of [Agent observations, actions, rewards] of a single Agent obtained after a Step.
+    \item[External Coordinator] - ML-Agents class responsible for communication with outside processes (in this case, the Python API).
+    \item[Frame] - An instance of rendering the main camera for the display. Corresponds to each Update call of the game engine.
+    \item[Observation] - Partial information describing the state of the environment available to a given agent. (e.g. Vector, Visual)
+    \item[Policy] - The decision making mechanism for producing decisions from observations, typically a neural network model.
+    \item[Reward] - Signal provided at every step used to indicate desirability of an agent’s action within the current state of the environment.
+    \item[State] - The underlying properties of the environment (including all agents within it) at a given time.
+    \item[Step] - Corresponds to an atomic change of the engine that happens between Agent decisions.
+    \item[Trainer] - Python class which is responsible for training a given group of Agents.  \cite{MLAgents_glossary}
+
+\end{description}

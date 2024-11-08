@@ -1,0 +1,110 @@
+{
+    "is_training": {
+        "lesson_num": 0
+    },
+    "rabbit_eating_carrot_reward": {
+        "lesson_num": 0
+    },
+    "fox_eating_rabbit_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "fox_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "rabbit_on_eaten": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_wall": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_water": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_food": {
+        "lesson_num": 0
+    },
+    "agent_drink_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_mating_reward": {
+        "lesson_num": 0
+    },
+    "fox_mating_reward": {
+        "lesson_num": 0
+    },
+    "agent_speed": {
+        "lesson_num": 0
+    },
+    "agent_sensory_range": {
+        "lesson_num": 0
+    },
+    "training_area_size": {
+        "lesson_num": 0
+    },
+    "RabbitMovement": {
+        "checkpoints": [
+            {
+                "steps": 499968,
+                "file_path": "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-499968.onnx",
+                "reward": null,
+                "creation_time": 1641246344.059726,
+                "auxillary_file_paths": [
+                    "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-499968.pt"
+                ]
+            },
+            {
+                "steps": 508864,
+                "file_path": "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-508864.onnx",
+                "reward": null,
+                "creation_time": 1641246383.054875,
+                "auxillary_file_paths": [
+                    "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-508864.pt"
+                ]
+            },
+            {
+                "steps": 568768,
+                "file_path": "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-568768.onnx",
+                "reward": null,
+                "creation_time": 1641246730.2851055,
+                "auxillary_file_paths": [
+                    "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-568768.pt"
+                ]
+            },
+            {
+                "steps": 569312,
+                "file_path": "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-569312.onnx",
+                "reward": 0.0,
+                "creation_time": 1641247244.0440524,
+                "auxillary_file_paths": [
+                    "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-569312.pt"
+                ]
+            },
+            {
+                "steps": 655328,
+                "file_path": "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-655328.onnx",
+                "reward": null,
+                "creation_time": 1641248035.959231,
+                "auxillary_file_paths": [
+                    "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-655328.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 655328,
+            "file_path": "results\\EatingCarrot-5\\RabbitMovement.onnx",
+            "reward": null,
+            "creation_time": 1641248035.959231,
+            "auxillary_file_paths": [
+                "results\\EatingCarrot-5\\RabbitMovement\\RabbitMovement-655328.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

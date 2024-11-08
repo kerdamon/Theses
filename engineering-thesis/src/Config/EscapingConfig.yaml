@@ -1,0 +1,55 @@
+behaviors:
+  RabbitMovement:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 1024
+      buffer_size: 10240
+      learning_rate: 0.0003
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 256
+      num_layers: 1
+      vis_encode_type: simple
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+    keep_checkpoints: 5
+    max_steps: 1000000
+    time_horizon: 64
+    summary_freq: 10000
+environment_parameters:
+  is_training: 1
+
+  # rewards
+  rabbit_eating_carrot_reward: 0
+  fox_eating_rabbit_reward: 0
+  rabbit_each_episode_fixed: 1
+  fox_each_episode_fixed: 0
+  rabbit_on_eaten: -1
+  agent_bump_into_wall: -0.01
+  agent_bump_into_water: -0.01
+  agent_bump_into_food: -0.01
+  agent_drink_reward: 0
+  rabbit_mating_reward: 0
+  fox_mating_reward: 0
+
+  # features
+  agent_speed:
+    sampler_type: uniform
+    sampler_parameters:
+      min_value: 0
+      max_value: 100
+  agent_sensory_range:
+    sampler_type: uniform
+    sampler_parameters:
+      min_value: 0
+      max_value: 100
+
+  # training area size
+  training_area_size: 1.0

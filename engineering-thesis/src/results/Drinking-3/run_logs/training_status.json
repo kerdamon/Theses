@@ -1,0 +1,83 @@
+{
+    "is_training": {
+        "lesson_num": 0
+    },
+    "rabbit_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "fox_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_wall": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_food": {
+        "lesson_num": 0
+    },
+    "agent_drink_reward": {
+        "lesson_num": 0
+    },
+    "agent_speed": {
+        "lesson_num": 0
+    },
+    "agent_sensory_range": {
+        "lesson_num": 0
+    },
+    "training_area_size": {
+        "lesson_num": 3
+    },
+    "AgentMovement": {
+        "checkpoints": [
+            {
+                "steps": 499968,
+                "file_path": "results\\Drinking-3\\AgentMovement\\AgentMovement-499968.onnx",
+                "reward": 14.057142767523017,
+                "creation_time": 1641191672.3946085,
+                "auxillary_file_paths": [
+                    "results\\Drinking-3\\AgentMovement\\AgentMovement-499968.pt"
+                ]
+            },
+            {
+                "steps": 727552,
+                "file_path": "results\\Drinking-3\\AgentMovement\\AgentMovement-727552.onnx",
+                "reward": null,
+                "creation_time": 1641192312.64498,
+                "auxillary_file_paths": [
+                    "results\\Drinking-3\\AgentMovement\\AgentMovement-727552.pt"
+                ]
+            },
+            {
+                "steps": 999936,
+                "file_path": "results\\Drinking-3\\AgentMovement\\AgentMovement-999936.onnx",
+                "reward": 9.571553467240717,
+                "creation_time": 1641228840.7546601,
+                "auxillary_file_paths": [
+                    "results\\Drinking-3\\AgentMovement\\AgentMovement-999936.pt"
+                ]
+            },
+            {
+                "steps": 1001728,
+                "file_path": "results\\Drinking-3\\AgentMovement\\AgentMovement-1001728.onnx",
+                "reward": 9.571553467240717,
+                "creation_time": 1641228841.320378,
+                "auxillary_file_paths": [
+                    "results\\Drinking-3\\AgentMovement\\AgentMovement-1001728.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1001728,
+            "file_path": "results\\Drinking-3\\AgentMovement.onnx",
+            "reward": 9.571553467240717,
+            "creation_time": 1641228841.320378,
+            "auxillary_file_paths": [
+                "results\\Drinking-3\\AgentMovement\\AgentMovement-1001728.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "is_training": {
+        "lesson_num": 0
+    },
+    "rabbit_eating_carrot_reward": {
+        "lesson_num": 0
+    },
+    "fox_eating_rabbit_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "fox_each_episode_fixed": {
+        "lesson_num": 0
+    },
+    "rabbit_on_eaten": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_wall": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_water": {
+        "lesson_num": 0
+    },
+    "agent_bump_into_food": {
+        "lesson_num": 0
+    },
+    "agent_drink_reward": {
+        "lesson_num": 0
+    },
+    "rabbit_mating_reward": {
+        "lesson_num": 0
+    },
+    "fox_mating_reward": {
+        "lesson_num": 0
+    },
+    "agent_speed": {
+        "lesson_num": 0
+    },
+    "agent_sensory_range": {
+        "lesson_num": 0
+    },
+    "training_area_size": {
+        "lesson_num": 0
+    },
+    "RabbitMovement": {
+        "checkpoints": [
+            {
+                "steps": 17034,
+                "file_path": "results\\Escaping-1\\RabbitMovement\\RabbitMovement-17034.onnx",
+                "reward": null,
+                "creation_time": 1641350792.7378652,
+                "auxillary_file_paths": [
+                    "results\\Escaping-1\\RabbitMovement\\RabbitMovement-17034.pt"
+                ]
+            },
+            {
+                "steps": 148704,
+                "file_path": "results\\Escaping-1\\RabbitMovement\\RabbitMovement-148704.onnx",
+                "reward": null,
+                "creation_time": 1641352320.7339647,
+                "auxillary_file_paths": [
+                    "results\\Escaping-1\\RabbitMovement\\RabbitMovement-148704.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 148704,
+            "file_path": "results\\Escaping-1\\RabbitMovement.onnx",
+            "reward": null,
+            "creation_time": 1641352320.7339647,
+            "auxillary_file_paths": [
+                "results\\Escaping-1\\RabbitMovement\\RabbitMovement-148704.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

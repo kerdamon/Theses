@@ -1,0 +1,287 @@
+default_settings: null
+behaviors:
+  MaleRabbitMovement:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 1024
+      buffer_size: 10240
+      learning_rate: 0.0003
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 256
+      num_layers: 1
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+    init_path: null
+    keep_checkpoints: 5
+    checkpoint_interval: 500000
+    max_steps: 1000000
+    time_horizon: 64
+    summary_freq: 10000
+    threaded: false
+    self_play: null
+    behavioral_cloning: null
+  MaleFoxMovement:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 1024
+      buffer_size: 10240
+      learning_rate: 0.0003
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 256
+      num_layers: 1
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+    init_path: null
+    keep_checkpoints: 5
+    checkpoint_interval: 500000
+    max_steps: 1000000
+    time_horizon: 64
+    summary_freq: 10000
+    threaded: false
+    self_play: null
+    behavioral_cloning: null
+env_settings:
+  env_path: null
+  env_args: null
+  base_port: 5005
+  num_envs: 1
+  seed: -1
+engine_settings:
+  width: 84
+  height: 84
+  quality_level: 5
+  time_scale: 20
+  target_frame_rate: -1
+  capture_frame_rate: 60
+  no_graphics: false
+environment_parameters:
+  is_training:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2414
+          value: 1
+      name: is_training
+      completion_criteria: null
+  rabbit_eating_carrot_reward:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2415
+          value: 0
+      name: rabbit_eating_carrot_reward
+      completion_criteria: null
+  fox_eating_rabbit_reward:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2416
+          value: 0
+      name: fox_eating_rabbit_reward
+      completion_criteria: null
+  rabbit_each_episode_fixed:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2417
+          value: -1
+      name: rabbit_each_episode_fixed
+      completion_criteria: null
+  fox_each_episode_fixed:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2418
+          value: -1
+      name: fox_each_episode_fixed
+      completion_criteria: null
+  rabbit_on_eaten:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2419
+          value: 0
+      name: rabbit_on_eaten
+      completion_criteria: null
+  agent_bump_into_wall:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2420
+          value: -0.01
+      name: agent_bump_into_wall
+      completion_criteria: null
+  agent_bump_into_water:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2421
+          value: -0.01
+      name: agent_bump_into_water
+      completion_criteria: null
+  agent_bump_into_food:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2422
+          value: -0.01
+      name: agent_bump_into_food
+      completion_criteria: null
+  agent_drink_reward:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2423
+          value: 0
+      name: agent_drink_reward
+      completion_criteria: null
+  rabbit_mating_reward:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2424
+          value: 1
+      name: rabbit_mating_reward
+      completion_criteria: null
+  fox_mating_reward:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2425
+          value: 1
+      name: fox_mating_reward
+      completion_criteria: null
+  agent_speed:
+    curriculum:
+    - value:
+        sampler_type: uniform
+        sampler_parameters:
+          seed: 2426
+          min_value: 0.0
+          max_value: 100.0
+      name: agent_speed
+      completion_criteria: null
+  agent_sensory_range:
+    curriculum:
+    - value:
+        sampler_type: uniform
+        sampler_parameters:
+          seed: 2427
+          min_value: 0.0
+          max_value: 100.0
+      name: agent_sensory_range
+      completion_criteria: null
+  training_area_size:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2428
+          value: 0.5
+      name: SmallAreaSize
+      completion_criteria:
+        behavior: MaleFoxMovement
+        measure: progress
+        min_lesson_length: 5
+        signal_smoothing: true
+        threshold: 0.1
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2429
+          value: 1.0
+      name: MediumAreaSize
+      completion_criteria:
+        behavior: MaleFoxMovement
+        measure: progress
+        min_lesson_length: 5
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2430
+          value: 2.0
+      name: LargeAreaSize
+      completion_criteria:
+        behavior: MaleFoxMovement
+        measure: progress
+        min_lesson_length: 5
+        signal_smoothing: true
+        threshold: 0.8
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2431
+          value: 3.0
+      name: ExtraLargeAreaSize
+      completion_criteria:
+        behavior: MaleFoxMovement
+        measure: reward
+        min_lesson_length: 0
+        signal_smoothing: true
+        threshold: 0.0
+        require_reset: false
+checkpoint_settings:
+  run_id: Mating-2-Fox
+  initialize_from: null
+  load_model: false
+  resume: true
+  force: false
+  train_model: false
+  inference: false
+  results_dir: results
+torch_settings:
+  device: null
+debug: false
